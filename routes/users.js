@@ -35,7 +35,7 @@ router.post('/login', function (req, res) {
       var total = rows[0].total;
       if (total) {
         req.session.logged = true;
-        res.redirect('/');
+        res.redirect('/admin');
       } else {
         res.render('login', {
           error: 'ชื่อผู้ใช้งาน/รหัสผ่าน ไม่ถูกต้อง'

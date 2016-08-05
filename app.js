@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var session = require('express-session')
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
+var admin = require('./routes/admin');
 var users = require('./routes/users');
 var partials = require('./routes/partials');
 
@@ -57,9 +58,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use('/', index);
 app.use('/users', users);
 
-app.use('/', auth, routes);
+app.use('/admin', auth, admin);
 app.use('/partials', auth, partials);
 
 // catch 404 and forward to error handler
