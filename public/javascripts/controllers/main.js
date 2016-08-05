@@ -2,8 +2,30 @@
 angular.module('app.controllers.Main', [])
   .controller('MainCtrl', function ($scope, MemberService, $mdDialog) {
     // Main ctrl
+
+    $scope.showPaging = true;    
+    $scope.search = {};
+
+    $scope.doSearch = function () {
+      if ($scope.search.query.length >= 2) {
+        $scope.showPaging = false;
+        $scope.showLoading = true;
+
+        MemberService.search($scope.search.query)
+          .success(function (data) {
+            $scope.members = data.rows;
+            $scope.showLoading = false;
+          })
+          .error(function () {
+            console.log('Connection failed!')
+            $scope.showLoading = false;
+          });
+      }
+    }
+
     $scope.getList = function (limit, offset) {
       $scope.showLoading = true;
+      $scope.showPaging = true;
 
       MemberService.getList(limit, offset)
         .success(function (data) {

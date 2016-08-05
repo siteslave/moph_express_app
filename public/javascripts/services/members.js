@@ -12,7 +12,11 @@ angular.module('app.services.Members', [])
         return $http.get('/admin/groups');
       },
       save: function (member) {
-        return $http.post('/admin/members', {member: member})
+        return $http.post('/admin/members', { member: member });
+      },
+      search: function (query) {
+        return $http.get('/admin/members/search?query=' + query);
       }
+
     }
   });

@@ -9,6 +9,16 @@ module.exports = {
       .orderBy('m.fullname');
   },
 
+  search: function (db, query) {
+    var _query = `%${query}%`;
+
+    return db('test_members as m')
+      .select('m.id', 'm.fullname', 'm.username', 'g.name as group_name')
+      .leftJoin('test_groups as g', 'g.id', 'm.group_id')
+      .where('m.fullname', 'like', _query)
+      .orderBy('m.fullname');
+  },
+
   getTotal: function (db) {
     return db('test_members')
       .count('* as total');

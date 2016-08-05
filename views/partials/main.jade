@@ -7,7 +7,18 @@ md-toolbar.md-whiteframe-z2
 md-progress-linear(md-mode="indeterminate", ng-show="showLoading")
 md-button.md-fab.md-fab-bottom-right(aria-label="Add", ng-click="showAddMember()")
   md-icon.material.icons person_add
+
 div(layout-padding)
+
+  md-toolbar
+    div.md-toolbar-tools
+      md-input-container(md-theme="input", flex="", class="md-input-theme", style="padding-top: 32px;")
+        label &nbsp;
+        input(ng-model="search.query", placeholder="enter search", style="color: #fff;")
+
+      md-button(aria-label="Search", ng-click="doSearch()")
+        md-icon.material-icons search
+
   md-content
     md-table-container
       table(md-table)
@@ -43,6 +54,7 @@ div(layout-padding)
                       | &nbsp; Remove
 
       md-table-pagination(
+        ng-show="showPaging"
         md-limit="query.limit" 
         md-page="query.page" 
         md-total="{{ total }}" 

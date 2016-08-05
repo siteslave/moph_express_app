@@ -29,6 +29,24 @@ router.get('/members', function (req, res) {
   
 });
 
+router.get('/members/search', function (req, res) {
+  var db = req.db;
+  var query = req.query.query;
+
+  // console.log(req.query);
+
+  Members.search(db, query)
+    .then(function (rows) {
+      // succes
+      res.send({ ok: true, rows: rows });
+    })
+    .catch(function (err) {
+      // error
+      res.send({ ok: false, msg: err });
+    });
+  
+});
+
 router.get('/members/total', function (req, res) {
   var db = req.db;
 
