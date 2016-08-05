@@ -83,7 +83,7 @@ if (app.get('env') === 'development') {
     //   error: err
     // });
     console.log(err);
-    res.send({ok: false, msg: err})
+    res.send({ok: false, msg: 'เกิดข้อผิดพลาด'})
   });
 }
 
@@ -96,7 +96,7 @@ app.use(function(err, req, res, next) {
   //   error: {}
   // });
    console.log(err);
-    res.send({ok: false, msg: err})
+    res.send({ok: false, msg: 'เกิดข้อผิดพลาด'})
 });
 
 

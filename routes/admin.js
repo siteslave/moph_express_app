@@ -12,8 +12,12 @@ router.get('/', function(req, res, next) {
 // admin/members
 router.get('/members', function (req, res) {
   var db = req.db;
+  var limit = parseInt(req.query.limit);
+  var offset = parseInt(req.query.offset);
 
-  Members.getList(db)
+  console.log(req.query);
+
+  Members.getList(db, limit, offset)
     .then(function (rows) {
       // succes
       res.send({ ok: true, rows: rows });
@@ -23,7 +27,22 @@ router.get('/members', function (req, res) {
       res.send({ ok: false, msg: err });
     });
   
-})
+});
+
+router.get('/members/total', function (req, res) {
+  var db = req.db;
+
+  Members.getTotal(db)
+    .then(function (rows) {
+      // succes
+      res.send({ ok: true, total: rows[0].total });
+    })
+    .catch(function (err) {
+      // error
+      res.send({ ok: false, msg: err });
+    });
+  
+});
 
 router.post('/members', function (req, res) {
   var db = req.db;

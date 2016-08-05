@@ -2,10 +2,10 @@
 angular.module('app.controllers.Main', [])
   .controller('MainCtrl', function ($scope, MemberService, $mdDialog) {
     // Main ctrl
-    $scope.getList = function () {
+    $scope.getList = function (limit, offset) {
       $scope.showLoading = true;
 
-      MemberService.getList()
+      MemberService.getList(limit, offset)
         .success(function (data) {
           if (data.ok) {
             $scope.members = data.rows;
@@ -21,6 +21,37 @@ angular.module('app.controllers.Main', [])
         });
     }
 
+    $scope.total = 0;
+    
+    // Paging
+    $scope.query = {
+      limit: 3,
+      page: 1
+    };
+
+    $scope.onPaginate = function (page, limit) {
+      var offset = (page - 1) * limit;
+      $scope.getList(limit, offset);
+    }
+
+    $scope.getTotal = function () {
+      MemberService.getTotal()
+        .success(function (data) {
+          $scope.total = data.total;
+        })
+        .error(function () {
+          
+        });
+    }
+
+    $scope.initialData = function () {
+      var limit = $scope.query.limit;
+      var offset = ($scope.query.page - 1) * $scope.query.limit;
+
+      $scope.getTotal();
+      $scope.getList(limit, offset);
+    };
+    
     $scope.showAddMember = function () {
 
       $mdDialog.show({
@@ -32,7 +63,7 @@ angular.module('app.controllers.Main', [])
         fullscreen: false
       })
         .then(function () {
-          
+          $scope.initialData();
         }, function () {
           //
         });
@@ -40,6 +71,6 @@ angular.module('app.controllers.Main', [])
     };
 
 
-    $scope.getList();
+    $scope.initialData();
     
   });

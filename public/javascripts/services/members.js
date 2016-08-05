@@ -2,8 +2,11 @@
 angular.module('app.services.Members', [])
   .factory('MemberService', function ($http) {
     return {
-      getList: function () {
-        return $http.get('/admin/members');
+      getList: function (limit, offset) {
+        return $http.get(`/admin/members?limit=${limit}&offset=${offset}`);
+      },
+      getTotal: function () {
+        return $http.get('/admin/members/total');
       },
       getGroups: function () {
         return $http.get('/admin/groups');

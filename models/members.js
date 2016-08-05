@@ -1,10 +1,19 @@
 
 module.exports = {
-  getList: function (db) {
+  getList: function (db, limit, offset) {
     return db('test_members as m')
       .select('m.id', 'm.fullname', 'm.username', 'g.name as group_name')
       .leftJoin('test_groups as g', 'g.id', 'm.group_id')
+      .limit(limit)
+      .offset(offset)
       .orderBy('m.fullname');
+  },
+
+  getTotal: function (db) {
+    return db('test_members')
+      .count('* as total');
+
+    //var sql = db('test_members').count('* as total').toString();
   },
 
   getGroups: function (db) {

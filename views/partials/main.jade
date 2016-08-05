@@ -22,7 +22,7 @@ div(layout-padding)
           tr(md-row, ng-if="!members.length")
             td(md-cell, colspan="5") ไม่พบรายการ
           tr(md-row, ng-repeat="m in members", ng-if="members.length")
-            td(md-cell) {{ $index + 1 }}
+            td(md-cell) {{ m.id }}
             td(md-cell) {{ m.username }}
             td(md-cell) {{ m.fullname }}
             td(md-cell) {{ m.group_name }}
@@ -41,3 +41,12 @@ div(layout-padding)
                     md-button(ng-click="remove(m)")
                       md-icon.material-icons close
                       | &nbsp; Remove
+
+      md-table-pagination(
+        md-limit="query.limit" 
+        md-page="query.page" 
+        md-total="{{ total }}" 
+        md-on-paginate="onPaginate" 
+        md-options="[5, 20, 30, 50]" 
+        md-label="{page: 'หน้า', rowsPerPage: 'เรคอร์ดต่อหน้า', of: 'จาก'}" 
+        md-page-select)
