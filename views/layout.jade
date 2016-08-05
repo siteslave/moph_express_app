@@ -1,0 +1,126 @@
+doctype html
+html(lang="en")
+head
+  title Material Application
+
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+  link(rel="stylesheet", href="/assets/angular-material/angular-material.min.css")
+  link(rel="stylesheet", href="/stylesheets/iconfont/material-icons.css")
+  link(rel="stylesheet", href="/assets/angular-material-data-table/dist/md-data-table.min.css")
+  link(rel="stylesheet", href="/stylesheets/style.css")
+
+  script(src="/assets/angular/angular.js")
+  script(src="/assets/angular-animate/angular-animate.min.js")
+  script(src="/assets/angular-aria/angular-aria.min.js")
+  script(src="/assets/angular-messages/angular-messages.min.js")
+  script(src="/assets/angular-material/angular-material.min.js")
+  script(src="/assets/angular-ui-router/release/angular-ui-router.min.js")
+  script(src="/assets/angular-material-data-table/dist/md-data-table.min.js")
+  script(src="/assets/moment/min/moment-with-locales.min.js")
+
+  script(src="/javascripts/app.js")
+  script(src="/javascripts/controllers/sidenav.js")
+  script(src="/javascripts/controllers/toolbar.js")
+  script(src="/javascripts/controllers/main.js")
+
+  block scripts
+
+
+body(ng-app="app")
+
+  div(layout="column",  style="height: 100%")
+
+    section(layout="row", flex, style="height: 100%")
+      div(ng-controller="SideNavCtrl")
+        md-sidenav.md-sidenav-left(md-component-id="left", md-is-locked-open="$mdMedia('gt-sm')", md-disable-backdrop="")
+
+          md-toolbar.md-whiteframe-z2
+            div.md-toolbar-tools
+              md-button.md-icon-button(aria-label="Settings", ng-click="toggleSidenav()")
+                md-ico.material-icons group
+              h2
+                span Material App
+          md-content
+            md-subheader Main Menu
+              md-menu-content
+                md-menu-item
+                  md-button(ui-sref="main")
+                    md-icon(md-menu-align-target)
+                      i.material-icons group
+                    | ทะเบียนสมาชิก
+                //- md-menu-item
+                //-   md-button(ui-sref="education")
+                //-     md-icon(md-menu-align-target)
+                //-       i.material-icons update
+                //-     | สำรวจความต้องการวิชาการ
+                //- md-menu-item
+                //-   md-button(ui-sref="car-request")
+                //-     md-icon(md-menu-align-target)
+                //-       i.material-icons local_taxi
+                //-     | ขออนุญาตใช้รถยนต์
+                //- md-menu-item
+                //-   md-button(ui-sref="ask-permission")
+                //-     md-icon(md-menu-align-target)
+                //-       i.material-icons local_library
+                //-     | ขออนุญาตไปราชการ
+                md-menu-item
+                  md-button(ui-sref="meetings", ng-disabled="true")
+                    md-icon(md-menu-align-target)
+                      i.material-icons monetization_on
+                    | สลิปเงินเดือน
+                md-menu-item
+                  md-button(ui-sref="meetings", ng-disabled="true")
+                    md-icon(md-menu-align-target)
+                      i.material-icons date_range
+                    | ลงทะเบียนลา
+
+            //- md-divider
+            //- md-subheader Reports
+            //-   md-menu-content
+            //-     md-menu-item
+            //-       md-button(ui-sref="reports")
+            //-         md-icon(md-menu-align-target)
+            //-           i.material-icons print
+            //-         | ประวัติฝึกอบรม/ประชุม
+            //-     md-menu-item
+            //-       md-button(ui-sref="meetings", ng-disabled="true")
+            //-         md-icon(md-menu-align-target)
+            //-           i.material-icons print
+            //-         | ประวัติลงเวลา
+            md-divider
+            md-subheader Settings
+              md-menu-content
+                md-menu-item
+                  md-button(ui-sref="info")
+                    md-icon(md-menu-align-target)
+                      i.material-icons account_circle
+                    | ข้อมูลส่วนตัว
+
+      md-content(layout="column", layout-fill, layout-align="top center", style="background-color: #e9ebee;")
+        div(layout="column", layout-fill, ng-controller="ToolbarCtrl")
+          md-toolbar.md-whiteframe-z2
+            div.md-toolbar-tools
+              md-button.md-icon-button(aria-label="Toggle", ng-click="toggleLeft()", hide-gt-sm)
+                md-icon.material-icons menu
+
+              h2 Members Management System
+              span(flex)
+
+              md-menu
+                md-button.md-icon-button(aria-label="More", ng-click="openMenu($mdOpenMenu, $event)")
+                  md-icon.material-icons more_vert
+
+                md-menu-content(width="4")
+                  md-menu-item
+                    md-button(ui-sref="info")
+                      md-icon(md-menu-align-target).material-icons account_circle
+                      | Profile
+
+                  md-menu-divider
+                  md-menu-item
+                    md-button(href="/logout")
+                      md-icon(md-menu-align-target).material-icons power_settings_new
+                      | Logout
+
+          div
+            block content

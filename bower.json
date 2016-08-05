@@ -1,0 +1,24 @@
+{
+  "name": "MaterialApp",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Satit Rianpit <siteslave@msn.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-ui-router": "^0.3.1",
+    "angular-material": "^1.0.9",
+    "angular-material-data-table": "^0.10.9",
+    "moment": "^2.14.1"
+  }
+}

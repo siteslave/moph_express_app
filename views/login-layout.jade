@@ -1,0 +1,37 @@
+doctype html
+html(lang="en")
+head
+  title Please login
+
+  meta(name="viewport", content="width=device-width, initial-scale=1")
+  link(rel="stylesheet", href="/assets/angular-material/angular-material.min.css")
+  link(rel="stylesheet", href="/stylesheets/iconfont/material-icons.css")
+  link(rel="stylesheet", href="/stylesheets/style.css")
+
+
+  script(src="/assets/angular/angular.js")
+  script(src="/assets/angular-animate/angular-animate.min.js")
+  script(src="/assets/angular-aria/angular-aria.min.js")
+  script(src="/assets/angular-messages/angular-messages.min.js")
+  script(src="/assets/angular-material/angular-material.min.js")
+
+  script(src="/javascripts/login-app.js")
+
+  block scripts
+
+
+body(ng-app="app")
+
+  div(layout="column",  style="height: 100%")
+
+    section(layout="row", flex, style="height: 100%")
+      md-content(layout="column", layout-fill, layout-align="top center", style="background-color: #e9ebee;")
+
+          md-toolbar
+            div.md-toolbar-tools
+              md-button.md-icon-button
+                md-icon.material-icons vpn_key
+              h3 MySQL App : Login
+
+          div
+            block content

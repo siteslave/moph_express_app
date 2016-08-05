@@ -1,0 +1,43 @@
+md-toolbar.md-whiteframe-z2
+  div.md-toolbar-tools
+    i.material-icons group
+    h2
+      | &nbsp; รายชื่อสมาชิก
+
+md-progress-linear(md-mode="indeterminate", ng-show="showLoading")
+//- md-button.md-fab.md-fab-bottom-right(aria-label="Add", ng-click="addNew($event)")
+//-   md-icon.material.icons person_add
+div(layout-padding)
+  md-content
+    md-table-container
+      table(md-table)
+        thead(md-head)
+          tr(md-row)
+            th(md-column, md-numeric) #
+            th(md-column) Username
+            th(md-column) Fullname
+            th(md-column) Group
+            th(md-column)
+        tbody(md-body)
+          tr(md-row, ng-if="!members.length")
+            td(md-cell, colspan="5") ไม่พบรายการ
+          tr(md-row, ng-repeat="m in members", ng-if="members.length")
+            td(md-cell) {{ $index + 1 }}
+            td(md-cell) {{ m.username }}
+            td(md-cell) {{ m.fullname }}
+            td(md-cell) {{ m.group_name }}
+            td(md-cell)
+
+              md-menu
+                md-button(aria-label="More", ng-click="openMenu($mdOpenMenu, $event)").md-icon-button
+                  md-icon.material-icons more_vert
+
+                md-menu-content(width="4")
+                  md-menu-item
+                    md-button(ng-click="edit(m)")
+                      md-icon.material-icons create
+                      | &nbsp; Edit
+                  md-menu-item
+                    md-button(ng-click="remove(m)")
+                      md-icon.material-icons close
+                      | &nbsp; Remove
