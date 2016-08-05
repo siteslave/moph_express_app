@@ -3,14 +3,13 @@ extends login-layout
 
 block content
   form(name="frmLogin", method="post", action="/users/login", layout-padding)
-    input(type="hidden", name="t", value="2")
     md-card(style="width: 460px;")
       md-card-title
         h2.md-subhead  ล๊อกอินเข้าสู่โปรแกรม
 
       md-card-content
-        if err
-          span(style="color: red;") #{err}
+        if error
+          span(style="color: red;") #{error}
         div(layout-gt-sm="column")
           md-input-container.md-block(flex-gt-sm)
             label ชื่อผู้ใช้งาน

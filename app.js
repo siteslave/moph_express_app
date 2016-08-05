@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var session = require('express-session')
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var partials = require('./routes/partials');
@@ -23,6 +25,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: 'sfsdfsdffefdsfdsf',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}))
 
 var db = require('knex')({
   client: 'mysql',
@@ -35,14 +43,24 @@ var db = require('knex')({
   }
 });
 
+var auth = function (req, res, next) {
+  // req.session
+  if (req.session.logged) {
+    next();
+  } else {
+    res.redirect('/users/login')
+  }
+}
+
 app.use(function (req, res, next) {
   req.db = db;
   next();
 });
 
-app.use('/', routes);
 app.use('/users', users);
-app.use('/partials', partials);
+
+app.use('/', auth, routes);
+app.use('/partials', auth, partials);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
