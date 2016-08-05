@@ -10,6 +10,16 @@ router.get('/login', function(req, res, next) {
   res.render('login');
 });
 
+router.get('/logout', function (req, res) {
+
+  req.session.destroy(function (err) {
+    if (!err) {
+      res.redirect('/users/login')
+    }
+  });
+
+})
+
 router.post('/login', function (req, res) {
   var db = req.db;
 
