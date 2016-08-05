@@ -5,12 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var session = require('express-session')
+var session = require('express-session');
+var jwt = require('jsonwebtoken');
 
 var index = require('./routes/index');
 var admin = require('./routes/admin');
 var users = require('./routes/users');
 var partials = require('./routes/partials');
+var api = require('./routes/api');
+var apis = require('./routes/apis');
 
 var app = express();
 
@@ -53,6 +56,34 @@ var auth = function (req, res, next) {
   }
 }
 
+var secretKey = '1234567890';
+
+var checkToken = (req, res, next) => {
+
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  if (token) {
+    jwt.verify(token, secretKey, function(err, decoded) {
+      if (err) {
+        return res.send({ ok: false, msg: 'Token ที่ส่งมาไม่ถูกต้อง.' });
+      } else {
+        req.decoded = decoded;
+        next();
+      }
+    });
+
+  } else {
+    return res.status(403).send({
+        ok: false,
+        msg: 'ไม่พบ Token'
+    });
+
+  }
+
+};
+
+
+
 app.use(function (req, res, next) {
   req.db = db;
   next();
@@ -60,6 +91,9 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/api', api);
+
+app.use('/apis', checkToken, apis);
 
 app.use('/admin', auth, admin);
 app.use('/partials', auth, partials);

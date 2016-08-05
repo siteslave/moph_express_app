@@ -1,12 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
+var jwt = require('jsonwebtoken');
 
 var Members = require('../models/members')
+
+var secretKey = '1234567890';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index-admin', { title: 'Express' });
+});
+
+router.get('/gettoken', function (req, res) {
+  var token = jwt.sign({fullname: 'satit rianpit'}, secretKey, {
+    expiresIn: "1d"
+  });
+
+  res.send(token);
+
 });
 
 // admin/members
