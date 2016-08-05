@@ -1,6 +1,6 @@
 
 angular.module('app.controllers.Main', [])
-  .controller('MainCtrl', function ($scope, MemberService) {
+  .controller('MainCtrl', function ($scope, MemberService, $mdDialog) {
   
     $scope.getList = function () {
       $scope.showLoading = true;
@@ -20,6 +20,24 @@ angular.module('app.controllers.Main', [])
           $scope.showLoading = false;
         });
     }
+
+    $scope.showAddMember = function () {
+
+      $mdDialog.show({
+        controller: 'AddMemberDialogCtrl',
+        templateUrl: '/partials/dialog/add-member',
+        parent: angular.element(document.body),
+        // targetEvent: event,
+        clickOutsideToClose: false,
+        fullscreen: false
+      })
+        .then(function () {
+          
+        }, function () {
+          //
+        });
+
+    };
 
 
     $scope.getList();

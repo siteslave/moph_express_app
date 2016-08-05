@@ -4,6 +4,9 @@ angular.module('app.services.Members', [])
     return {
       getList: function () {
         return $http.get('/admin/members');
+      },
+      getGroups: function () {
+        return $http.get('/admin/groups');
       }
     }
   });

@@ -6,7 +6,8 @@ angular.module('app', [
   'app.controllers.SideNav',
   'app.controllers.Toolbar',
   'app.controllers.Main',
-  'app.services.Members'
+  'app.services.Members',
+  'app.controllers.AddMemberDialog'
 ])
   .config(function ($mdDateLocaleProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider) {
   
