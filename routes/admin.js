@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
 
 var Members = require('../models/members')
 
@@ -27,6 +28,7 @@ router.get('/members', function (req, res) {
 router.post('/members', function (req, res) {
   var db = req.db;
   var member = req.body.member;
+  // console.log(req.body);
   member.password = crypto.createHash('md5')
     .update(member.password).digest('hex');
   

@@ -7,6 +7,9 @@ angular.module('app.services.Members', [])
       },
       getGroups: function () {
         return $http.get('/admin/groups');
+      },
+      save: function (member) {
+        return $http.post('/admin/members', {member: member})
       }
     }
   });

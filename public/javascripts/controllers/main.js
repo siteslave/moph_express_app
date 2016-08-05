@@ -1,7 +1,7 @@
 
 angular.module('app.controllers.Main', [])
   .controller('MainCtrl', function ($scope, MemberService, $mdDialog) {
-  
+    // Main ctrl
     $scope.getList = function () {
       $scope.showLoading = true;
 

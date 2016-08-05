@@ -26,7 +26,7 @@ md-dialog(aria-label='Add member', ng-cloak='', flex='80')
           div(flex='')
             md-input-container
               label Group
-              md-select(style='width: 250px;', ng-model='user.group_id')
+              md-select(style='width: 250px;', ng-model='member.group_id')
                 md-option(ng-repeat='group in groups', value='{{group.id}}')
                   | {{group.name}}
     md-dialog-actions(layout='row')
