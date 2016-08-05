@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
   res.render('index-admin', { title: 'Express' });
 });
 
-
+// admin/members
 router.get('/members', function (req, res) {
   var db = req.db;
 
@@ -80,7 +80,6 @@ router.delete('/members/:id', function (req, res) {
       res.send({ ok: false, msg: err })
     });
 })
-
 
 router.get('/groups', function (req, res) {
   var db = req.db;

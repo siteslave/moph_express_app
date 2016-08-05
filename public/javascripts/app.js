@@ -5,7 +5,8 @@ angular.module('app', [
   'md.data.table',
   'app.controllers.SideNav',
   'app.controllers.Toolbar',
-  'app.controllers.Main'
+  'app.controllers.Main',
+  'app.services.Members'
 ])
   .config(function ($mdDateLocaleProvider, $mdThemingProvider, $stateProvider, $urlRouterProvider) {
   
