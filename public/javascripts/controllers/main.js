@@ -25,7 +25,7 @@ angular.module('app.controllers.Main', [])
     
     // Paging
     $scope.query = {
-      limit: 3,
+      limit: 10,
       page: 1
     };
 
@@ -40,7 +40,7 @@ angular.module('app.controllers.Main', [])
           $scope.total = data.total;
         })
         .error(function () {
-          
+
         });
     }
 
